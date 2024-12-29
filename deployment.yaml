@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackJack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blackJack
+  template:
+    metadata:
+      labels:
+        app: blackJack
+    spec:
+      containers:
+      - name: blackJack
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/aharon-black:3001-v1
+        imagePullPolicy: Always
+        command: ["opentelemetry-instrument", "python", "app.py"]
+        workingDir: /app
+        ports:
+        - name: http
+          containerPort: 5003
+        env:
+        - name: OTEL_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: OTEL_SERVICE_NAME
+          value: aharon-black
+        - name: OTEL_RESOURCE_ATTRIBUTES
+          value: cx.application.name=aharon-black,cx.subsystem.name=aharon-black-byaharon
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: http://$(OTEL_IP):4317
