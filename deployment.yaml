@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: blackjack
-        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/aharon-black:3001-v4
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/aharon-black:1
         imagePullPolicy: Always
         command: ["opentelemetry-instrument", "python", "app.py"]
         workingDir: /app
@@ -31,4 +31,4 @@ spec:
         - name: OTEL_RESOURCE_ATTRIBUTES
           value: cx.application.name=aharon-black,cx.subsystem.name=aharon-black-byaharon
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: http://$(OTEL_IP):4317
+          value: http://127.0.0.1:4317

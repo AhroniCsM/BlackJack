@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy application and requirements to the container
-COPY app.py /app
+COPY . /app
 COPY requirements.txt /app
 
 # Install necessary packages
