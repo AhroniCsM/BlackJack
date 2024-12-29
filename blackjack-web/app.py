@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import random
 
+# Initialize Flask application
 app = Flask(__name__)
 
 # Define card values and deck
@@ -70,4 +71,5 @@ def stand():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Ensure the app runs on port 5003 with host 0.0.0.0
+    app.run(host='0.0.0.0', port=5003, debug=False)

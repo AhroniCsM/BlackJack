@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: blackJack
+  name: blackjack
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: blackJack
+      app: blackjack
   template:
     metadata:
       labels:
-        app: blackJack
+        app: blackjack
     spec:
       containers:
-      - name: blackJack
-        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/aharon-black:3001-v1
+      - name: blackjack
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/aharon-black:3001-v4
         imagePullPolicy: Always
         command: ["opentelemetry-instrument", "python", "app.py"]
         workingDir: /app
@@ -27,7 +27,7 @@ spec:
             fieldRef:
               fieldPath: status.hostIP
         - name: OTEL_SERVICE_NAME
-          value: aharon-black
+          value: blackjack
         - name: OTEL_RESOURCE_ATTRIBUTES
           value: cx.application.name=aharon-black,cx.subsystem.name=aharon-black-byaharon
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
